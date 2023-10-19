@@ -5,8 +5,8 @@ defineProps<{ msg: string }>()
 const countRef = ref(false)
 const state = reactive({
   countMet: {
-    count: 0
-  }
+    count: 0,
+  },
 })
 
 const incrementRef = () => {
@@ -16,8 +16,6 @@ const incrementRef = () => {
 const increment = () => {
   state.countMet.count += 12
 }
-
-
 </script>
 
 <template>
@@ -26,7 +24,7 @@ const increment = () => {
   </div>
 
   <div class="card">
-    <button type="button" @click="incrementRef">[Ref] count is {{ }}</button>
+    <button type="button" @click="incrementRef">[Ref] count is {{}}</button>
     <button type="button" @click="increment">[Method] count is {{ state.countMet.count }}</button>
     <p>
       Edit
