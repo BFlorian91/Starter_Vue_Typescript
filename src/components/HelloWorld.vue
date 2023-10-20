@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, Ref } from 'vue'
 
 defineProps<{ msg: string }>()
-const countRef = ref(false)
+const divShow: Ref<boolean> = ref(false)
 const state = reactive({
   countMet: {
     count: 0,
   },
 })
 
-const incrementRef = () => {
-  countRef.value = !countRef.value
+const toggleDiv = () => {
+  divShow.value = !divShow.value
 }
 
 const increment = () => {
@@ -20,16 +20,13 @@ const increment = () => {
 
 <template>
   <div class="title">
-    <h1 v-if="countRef">{{ msg }}</h1>
+    <h1 v-if="divShow">{{ msg }}</h1>
+    <p class="count" v-else>{{ state.countMet.count }}</p>
   </div>
 
   <div class="card">
-    <button type="button" @click="incrementRef">[Ref] count is {{}}</button>
-    <button type="button" @click="increment">[Method] count is {{ state.countMet.count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+    <button type="button" @click="toggleDiv">[Ref] Toggle is {{ divShow ? 'on' : 'off' }}</button>
+    <button type="button" @click="increment" :disabled="divShow">increment</button>
   </div>
 
   <p>
@@ -46,16 +43,25 @@ const increment = () => {
 </template>
 
 <style scoped>
+.count {
+  color: #42b883;
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 0;
+}
 .title {
   height: 6rem;
-  background: pink;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  rotate: calc(180deg);
 }
 
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
 .read-the-docs {
   color: #888;
 }
