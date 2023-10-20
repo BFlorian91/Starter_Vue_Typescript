@@ -19,8 +19,8 @@ const increment = () => {
 </script>
 
 <template>
-  <div class="title">
-    <h1 v-if="divShow">{{ msg }}</h1>
+  <div class="flex justify-center items-center h-45">
+    <h1 class="text-teal-400" v-if="divShow">{{ msg }}</h1>
     <p class="count" v-else>{{ state.countMet.count }}</p>
   </div>
 
@@ -48,12 +48,6 @@ const increment = () => {
   font-size: 4rem;
   font-weight: bold;
   margin: 0;
-}
-.title {
-  height: 6rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .card {
