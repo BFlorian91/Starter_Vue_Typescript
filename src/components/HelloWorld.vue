@@ -19,47 +19,33 @@ const increment = () => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center h-45">
+  <div class="flex justify-center items-center h-10 py-10">
     <h1 data-testid="message-test" class="text-teal-400" v-if="divShow">{{ msg }}</h1>
-    <p data-testid="count-test" class="count" v-else>{{ state.countMet.count }}</p>
+    <p data-testid="count-test" class="text-3xl font-bold text-pink-200" v-else>{{ state.countMet.count }}</p>
   </div>
 
-  <div class="card">
-    <button data-testid="show-message-test" type="button" @click="toggleDiv">
-      [Ref] Toggle is {{ divShow ? 'on' : 'off' }}
-    </button>
-    <button data-testid="increment-test" type="button" @click="increment" :disabled="divShow">increment</button>
+  <div class="h-10">
+    <div class="flex justify-center gap-8">
+      <button
+        class="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+        data-testid="show-message-test"
+        type="button"
+        @click="toggleDiv"
+      >
+        Toggle {{ divShow ? 'on' : 'off' }}
+      </button>
+      <button
+        class="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+        data-testid="increment-test"
+        type="button"
+        @click="increment"
+        :disabled="divShow"
+      >
+        increment
+      </button>
+    </div>
+    <p class="pt-4">{{ msg }}</p>
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the official Vue + Vite
-    starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
-  <p>{{ msg }}</p>
 </template>
 
-<style scoped>
-.count {
-  color: #42b883;
-  font-size: 4rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-.card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-.read-the-docs {
-  color: #888;
-}
-</style>
+```

@@ -1,18 +1,31 @@
-// create a composable to fetch data from the API
 import { ref } from 'vue'
 
-export function useFetch(url: string) {
-  const data = ref(null)
-  const error = ref(null)
-  const loading = ref(true)
+// Data is the type of the data we want to fetch (e.g. a list of users) T generic
 
-  fetch(url)
-    .then((res) => res.json())
-    .then((json) => (data.value = json))
-    .catch((err) => (error.value = err))
-    .finally(() => (loading.value = false))
+export function useFetch<Data>(url: string) {
+  const data = ref<Data | null>(null)
+  const error = ref<string | null>(null)
+  const isLoading = ref<boolean>(true)
 
-  fetch(url)
+  const fetchData = async () => {
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des données.')
+      }
+      data.value = await response.json()
+    } catch (err) {
+      if (err instanceof Error) {
+        error.value = err.message
+      } else {
+        error.value = 'Oops! Something went wrong.'
+      }
+    } finally {
+      isLoading.value = false
+    }
+  }
 
-  return { data, error, loading }
+  fetchData()
+
+  return { data, error, isLoading }
 }
