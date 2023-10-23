@@ -1,19 +1,48 @@
 import { describe, test, expect } from 'vitest'
-import { render, fireEvent, screen } from '@testing-library/vue'
+import { mount } from '@vue/test-utils'
 
 import HelloWorld from './HelloWorld.vue'
 
 describe('HelloWorld', () => {
-  test('increments value on click', async () => {
-    render(HelloWorld)
+  test('It should rend the message hello world', () => {
+    const wrapper = mount(HelloWorld, {
+      props: {
+        msg: 'Hello World',
+      },
+    })
 
-    const button = screen.getByText('increment')
+    expect(wrapper.text()).toContain('Hello World')
+  })
 
-    await fireEvent.click(button)
-    await fireEvent.click(button)
+  test('It should increments value on click', async () => {
+    const wrapper = mount(HelloWorld, {
+      props: {
+        msg: 'Hello World',
+      },
+    })
 
-    const countValue = screen.getByText('24')
+    const button = '[data-testid="increment-test"]'
+    const counter = '[data-testid="count-test"]'
 
-    expect(countValue.textContent).toBe('24')
+    await wrapper.find(button).trigger('click')
+
+    expect(wrapper.find(counter).text()).toContain('12')
+  })
+
+  //show div message when click button
+  test('It should show div message when click button', async () => {
+    const wrapper = mount(HelloWorld, {
+      props: {
+        msg: 'Hello World',
+      },
+    })
+
+    const button = wrapper.get('[data-testid="show-message-test"]')
+
+    await button.trigger('click')
+
+    const message = wrapper.get('[data-testid="message-test"]')
+
+    expect(message.text()).toContain('Hello World')
   })
 })

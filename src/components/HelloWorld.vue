@@ -20,13 +20,15 @@ const increment = () => {
 
 <template>
   <div class="flex justify-center items-center h-45">
-    <h1 class="text-teal-400" v-if="divShow">{{ msg }}</h1>
-    <p class="count" v-else>{{ state.countMet.count }}</p>
+    <h1 data-testid="message-test" class="text-teal-400" v-if="divShow">{{ msg }}</h1>
+    <p data-testid="count-test" class="count" v-else>{{ state.countMet.count }}</p>
   </div>
 
   <div class="card">
-    <button type="button" @click="toggleDiv">[Ref] Toggle is {{ divShow ? 'on' : 'off' }}</button>
-    <button type="button" @click="increment" :disabled="divShow">increment</button>
+    <button data-testid="show-message-test" type="button" @click="toggleDiv">
+      [Ref] Toggle is {{ divShow ? 'on' : 'off' }}
+    </button>
+    <button data-testid="increment-test" type="button" @click="increment" :disabled="divShow">increment</button>
   </div>
 
   <p>
@@ -40,6 +42,7 @@ const increment = () => {
     in your IDE for a better DX
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <p>{{ msg }}</p>
 </template>
 
 <style scoped>
